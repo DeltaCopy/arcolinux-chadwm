@@ -37,7 +37,7 @@ static const int new_window_attach_on_end = 0; /*  1 means the new window will a
 #define ICONSIZE 19   /* icon size */
 #define ICONSPACING 8 /* space between icon and title */
 
-static const char *fonts[]          = {"JetBrainsMono Nerd Font Mono:style:bold:size=13"};
+static const char *fonts[]          = {"JetBrainsMono Nerd Font Mono:style:bold:size=15"};
 
 // theme
 #include "themes/onedark.h"
@@ -50,26 +50,31 @@ static const char *fonts[]          = {"JetBrainsMono Nerd Font Mono:style:bold:
 
 static const char *colors[][3]      = {
     /*                     fg       bg      border */
-    [SchemeNorm]       = { gray3,   black,  gray2 },
-    [SchemeSel]        = { gray4,   blue,   blue  },
-    [SchemeTitle]      = { white,   black,  black  }, // active window title
-    [TabSel]           = { blue,    gray2,  black },
-    [TabNorm]          = { gray3,   black,  black },
-    [SchemeTag]        = { gray3,   black,  black },
-    [SchemeTag1]       = { blue,    black,  black },
-    [SchemeTag2]       = { red,     black,  black },
-    [SchemeTag3]       = { orange,  black,  black },
-    [SchemeTag4]       = { green,   black,  black },
-    [SchemeTag5]       = { blue,    black,  black },
-    [SchemeTag6]       = { pinky,   black,  black },
-    [SchemeTag7]       = { pink,    black,  black },
-    [SchemeTag8]       = { orange,  black,  black },
-    [SchemeTag9]       = { red,     black,  black },
-    [SchemeTag10]      = { blue,    black,  black },    
-    [SchemeLayout]     = { green,   black,  black },
-    [SchemeBtnPrev]    = { green,   black,  black },
-    [SchemeBtnNext]    = { yellow,  black,  black },
-    [SchemeBtnClose]   = { red,     black,  black },
+    [SchemeNorm]        = { gray3,   black,  gray2 },
+    [SchemeSel]         = { gray4,   blue,   blue  },
+    [SchemeTitle]       = { white,   black,  black  }, // active window title
+    [TabSel]            = { blue,    gray2,  black },
+    [TabNorm]           = { gray3,   black,  black },
+    [SchemeTag]         = { gray3,   black,  black },
+    [SchemeTag1]        = { blue,    black,  black },
+    [SchemeTag2]        = { red,     black,  black },
+    [SchemeTag3]        = { orange,  black,  black },
+    [SchemeTag4]        = { green,   black,  black },
+    [SchemeTag5]        = { blue,    black,  black },
+    [SchemeTag6]        = { pinky,   black,  black },
+    [SchemeTag7]        = { pink,    black,  black },
+    [SchemeTag8]        = { orange,  black,  black },
+    [SchemeTag9]        = { red,     black,  black },
+    [SchemeTag10]       = { blue,    black,  black },
+    [SchemeLayout]      = { green,   black,  black },
+    [SchemeBtnPrev]     = { green,   black,  black },
+    [SchemeBtnNext]     = { yellow,  black,  black },
+    [SchemeBtnClose]    = { red,     black,  black },
+    [SchemeLayoutFF]    = { yellow,   black,  black },
+    [SchemeLayoutDS]    = { red,   black,  black },
+    [SchemeLayoutTG]    = { green,   black,  black },
+    [SchemeLayoutMS]    = { pinky,   black,  black },
+    [SchemeLayoutPC]    = { orange,   black,  black },
 };
 
 /* tagging */
@@ -80,15 +85,17 @@ static char *tags[] = { "", "", "", "", "", "", "", "", 
 //static char *tags[] = { "Web", "Chat", "Edit", "Meld", "Vb", "Mail", "Video", "Image", "Files", "Music" };
 //static char *tags[] = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十"};
 
+static const char* firefox[] = { "firefox", "open", "firefox", NULL };
 static const char* eww[] = { "eww", "open" , "eww", NULL };
 static const char* discord[] = { "discord", "open" , "discord", NULL };
 static const char* telegram[] = { "telegram-desktop", "open" , "telegram-desktop", NULL };
 static const char* mintstick[] = { "mintstick", "-m", "iso", NULL};
 static const char* pavucontrol[] = { "pavucontrol", NULL };
 
+
 static const Launcher launchers[] = {
     /* command     name to display */
-    { eww,           "數" },
+    { firefox,         "" },
     { discord,       "ﱲ" },
     { telegram,      "" },
     { mintstick,     "虜" },
@@ -103,6 +110,9 @@ static const unsigned int ulinepad      = 5; /* horizontal padding between the u
 static const unsigned int ulinestroke   = 2; /* thickness / height of the underline */
 static const unsigned int ulinevoffset  = 0; /* how far above the bottom of the bar the line should appear */
 static const int ulineall               = 0; /* 1 to show underline on all tags, 0 for just the active ones */
+
+/* launcher commands (They must be NULL terminated) */
+static const char* surf[]      = { "surf", "duckduckgo.com", NULL };
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -252,7 +262,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,                 XK_w,       setborderpx,    {.i = default_border } },
 
     // kill dwm
-    //{ MODKEY|ControlMask,               XK_q,       spawn,        SHCMD("killall bar.sh chadwm") },
+    //{ MODKEY|ControlMask,               XK_q,       spawn,        SHCMD("killall bar.sh dwm") },
 
     // kill window
     { MODKEY,                           XK_q,       killclient,     {0} },

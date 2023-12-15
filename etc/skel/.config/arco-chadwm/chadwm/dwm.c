@@ -113,7 +113,13 @@ enum {
   TabNorm,
   SchemeBtnPrev,
   SchemeBtnNext,
-  SchemeBtnClose
+  SchemeBtnClose,
+  SchemeColor,
+  SchemeLayoutFF,
+  SchemeLayoutDS,
+  SchemeLayoutTG,
+  SchemeLayoutMS,
+  SchemeLayoutPC
 }; /* color schemes */
 enum {
   NetSupported,
@@ -233,6 +239,8 @@ typedef struct {
 	const char** command;
 	const char* name;
 } Launcher;
+
+
 
 /* function declarations */
 static void applyrules(Client *c);
@@ -1519,12 +1527,31 @@ void drawbar(Monitor *m) {
     x += w;
   }
   w = TEXTW(m->ltsymbol);
-  drw_setscheme(drw, scheme[SchemeLayout]);
+  //drw_setscheme(drw, scheme[SchemeLayout]);
   x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
   	for (i = 0; i < LENGTH(launchers); i++)
 	{
-		w = TEXTW(launchers[i].name);
+      if (launchers[i].command == firefox){
+        drw_setscheme(drw, scheme[SchemeLayoutFF]);
+      }
+      if (launchers[i].command == discord){
+        drw_setscheme(drw, scheme[SchemeLayoutDS]);
+      }
+      if (launchers[i].command == telegram){
+        drw_setscheme(drw, scheme[SchemeLayoutTG]);
+      }
+      if (launchers[i].command == mintstick){
+        drw_setscheme(drw, scheme[SchemeLayoutMS]);
+      }
+      if (launchers[i].command == pavucontrol){
+        drw_setscheme(drw, scheme[SchemeLayoutPC]);
+      }
+
+
+        w = TEXTW(launchers[i].name);
+
+
 		drw_text(drw, x, 0, w, bh, lrpad / 2, launchers[i].name, urg & 1 << i);
 		x += w;
 	}
