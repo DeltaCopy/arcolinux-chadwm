@@ -38,9 +38,9 @@ super + F7
 super + F8
     thunar
 
-#Evolution
+#Audio player
 super + F9
-    evolution
+    lollypop
 
 #Spotify
 super + F10
@@ -309,6 +309,8 @@ alt + shift + u
 ctrl + shift + Escape
     xfce4-taskmanager
 
+ctrl + alt + End
+    dex --term alacritty /usr/share/applications/btop.desktop
 
 #################################################################
 #     SCREENSHOTS
